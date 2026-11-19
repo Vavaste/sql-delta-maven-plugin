@@ -1,0 +1,4 @@
+# The slf4j backend of the engine. Hibernate and Liquibase log through slf4j, which picks its backend from the
+# META-INF/services/org.slf4j.spi.SLF4JServiceProvider files on the class path: in a Spring Boot project that is
+# Logback, which would print every library line to the console and read the project's logging configuration.
+io.github.vavaste.sqldelta.engine.EngineSlf4jProvider

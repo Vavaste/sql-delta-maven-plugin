@@ -1,0 +1,35 @@
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          # the bytecode is fixed by maven.compiler.release=17
+          java-version: '17'
+          cache: maven
+          # writes a settings.xml with the server central (= publishingServerId) reading these variables
+          server-id: central
+          server-username-env-var: MAVEN_CENTRAL_USERNAME
+          server-password-env-var: MAVEN_CENTRAL_PASSWORD
+      - name: Set the version from the tag
+        # tag v1.2.3 -> version 1.2.3, in the checked out pom.xml only: nothing is committed
+        run: ./mvnw -B -ntp versions:set -DnewVersion=${GITHUB_REF_NAME#v} -DgenerateBackupPoms=false
+      - name: Deploy to Maven Central
+        # the gpg plugin (bc signer) reads the key and passphrase from the environment
+        run: ./mvnw -B -ntp -Prelease deploy
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          MAVEN_GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
