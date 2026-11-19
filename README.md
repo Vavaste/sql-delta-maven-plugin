@@ -24,6 +24,7 @@ In the `pom.xml` of the module that holds the entities, give the configuration a
 <properties>
     <sqldelta.url>jdbc:postgresql://localhost:5432/shop</sqldelta.url>
     <sqldelta.username>shop</sqldelta.username>
+    <sqldelta.password>shop</sqldelta.password>
     <sqldelta.migrationsDirectory>${project.basedir}/src/main/resources/db/migration</sqldelta.migrationsDirectory>
 </properties>
 
@@ -34,13 +35,18 @@ In the `pom.xml` of the module that holds the entities, give the configuration a
 </plugin>
 ```
 
-Unlike a `<configuration>` block, properties can be overridden for one run: `-Dsqldelta.url=jdbc:...`. The password
-stays out of the POM: without the `password` parameter, the plugin reads the `SQLDELTA_PASSWORD` environment variable.
-Bring your development database up to date with the committed migrations (starting the application does it), change
-the entities, then run:
+The plugin connects with url, username **and** password: without a password the connection fails. Writing it in the
+POM is fine for a local development database, such as the one of a `docker compose` file, whose password is in the
+repository anyway; reuse your Flyway properties if you have them:
+`<sqldelta.password>${flyway.password}</sqldelta.password>`. For any other database leave `sqldelta.password` out and
+set the `SQLDELTA_PASSWORD` environment variable instead: the plugin reads it only when the `password` parameter is not
+set, so a password in the POM wins over it.
+
+Unlike a `<configuration>` block, properties can be overridden for one run: `-Dsqldelta.url=jdbc:...`. Bring your
+development database up to date with the committed migrations (starting the application does it), change the
+entities, then run:
 
 ```
-export SQLDELTA_PASSWORD=...
 ./mvnw sql-delta:diff -Dsqldelta.name=add_customer_email
 ```
 
@@ -72,7 +78,7 @@ Set them as properties, in the POM or with `-D`, or in the plugin's `<configurat
 |---|---|---|---|
 | `url` | `sqldelta.url` | required | JDBC URL of the database. The JDBC driver must be a dependency of the project. |
 | `username` | `sqldelta.username` | | Database user. |
-| `password` | `sqldelta.password` | env `SQLDELTA_PASSWORD` | Database password. Prefer the environment variable, which keeps it out of the POM and the command line; a `mvn -X` log contains it either way. |
+| `password` | `sqldelta.password` | env `SQLDELTA_PASSWORD` | Database password, required to connect. In the POM for a local development database; for any other one use the environment variable, which keeps it out of the POM and the command line (a `mvn -X` log contains it either way). |
 | `schema` | `sqldelta.schema` | the connection's | Schema to compare, which must exist. The statements do not name it: run the draft with it as the current schema, as Flyway does with `defaultSchema`. |
 | `packages` | `sqldelta.packages` | detected | Comma-separated packages of the entities, subpackages included. Detected from the module's compiled classes; set it when the entities come from another module. |
 | `physicalNamingStrategy` | `sqldelta.physicalNamingStrategy` | Spring Boot's | Physical naming strategy class; Hibernate's default without Spring Boot. |
