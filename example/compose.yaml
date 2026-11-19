@@ -1,0 +1,11 @@
+name: sqldelta-example
+
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: example
+      POSTGRES_USER: example
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5433:5432"

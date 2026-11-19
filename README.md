@@ -3,6 +3,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.vavaste/sql-delta-maven-plugin)](https://central.sonatype.com/artifact/io.github.vavaste/sql-delta-maven-plugin)
 [![ci](https://github.com/Vavaste/sql-delta-maven-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/Vavaste/sql-delta-maven-plugin/actions/workflows/ci.yml)
 
+![A new field on the Animal entity, the preview of the migration and the V2 file it writes](docs/demo.gif)
+
 Compares the JPA entities of a Spring project with a live database and drafts the SQL migration that brings the
 database in line with them. With Flyway, the draft becomes the next `V<n>__<name>.sql`. In CI, the same comparison
 fails the build when an entity changed and no migration came with it.
@@ -15,6 +17,12 @@ fails the build when an entity changed and no migration came with it.
   out those that destroy data. It only reads the database, and runs from the command line: no IDE plugin, no Docker.
 - It does not detect renames (it notes likely ones), write data backfills or invent defaults for new `NOT NULL`
   columns: the draft is a starting point to read, edit and commit like a migration written by hand.
+
+## Try it
+
+[`example/`](example) is a Spring Boot application with one entity, Flyway and PostgreSQL in Docker Compose. Clone
+the repository and follow its README: add a field to the entity, preview the migration, write it as
+`V2__add_animal_habitat.sql` and apply it, in a few minutes.
 
 ## Quick start
 
