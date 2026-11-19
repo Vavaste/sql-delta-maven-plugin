@@ -1,6 +1,3 @@
-  [![Maven Central](https://img.shields.io/maven-central/v/io.github.vavaste/sql-delta-maven-plugin)](https://central.sonatype.com/artifact/io.github.vavaste/sql-delta-maven-plugin)
-  [![ci](https://github.com/Vavaste/sql-delta-maven-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/Vavaste/sql-delta-maven-plugin/actions/workflows/ci.yml)
-
 # sql-delta-maven-plugin
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.vavaste/sql-delta-maven-plugin)](https://central.sonatype.com/artifact/io.github.vavaste/sql-delta-maven-plugin)

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question
+    url: https://github.com/Vavaste/sql-delta-maven-plugin/discussions
+    about: Ask how to use the plugin in Discussions.
+  - name: Security report
+    url: https://github.com/Vavaste/sql-delta-maven-plugin/security/advisories/new
+    about: Report a vulnerability privately, never in a public issue.

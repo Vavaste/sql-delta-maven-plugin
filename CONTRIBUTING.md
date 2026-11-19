@@ -1,5 +1,15 @@
 # Contributing
 
+## How to contribute
+
+- Bugs and feature requests start as an issue, through its form. Questions go to
+  [Discussions](https://github.com/Vavaste/sql-delta-maven-plugin/discussions). Security problems are reported
+  privately, as [SECURITY.md](SECURITY.md) explains.
+- Fork the repository, branch from `main` and open a pull request against it. Before opening it, `./mvnw verify` and
+  `./mvnw verify -Phibernate6` pass, tests cover the change, and README or CONTRIBUTING say what changed for users.
+  CI must be green and the maintainer approves; the pull request is squash merged, its title and description becoming
+  the commit.
+
 ## Layout
 
 `io.github.vavaste.sqldelta` is the Maven side, in the plugin's class realm:

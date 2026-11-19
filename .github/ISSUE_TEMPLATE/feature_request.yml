@@ -1,0 +1,30 @@
+name: Feature request
+description: Something the plugin should compare, draft or report.
+labels: [enhancement, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The plugin stays deliberately small. A feature that adds much code for a rare case may be declined, even when
+        it works. Questions go to [Discussions](https://github.com/Vavaste/sql-delta-maven-plugin/discussions).
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What you are trying to do, and what the plugin does today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What the plugin should do instead, for example the draft you would expect.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other ways to get there, such as a parameter you already tried or a step by hand.
+    validations:
+      required: false

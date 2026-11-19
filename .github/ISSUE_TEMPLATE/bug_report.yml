@@ -1,0 +1,68 @@
+name: Bug report
+description: A wrong draft, a failing goal or a wrong check result.
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Logs, and `mvn -X` output in particular, can contain the database URL and password. Remove them before
+        pasting anything here. Security problems go to a
+        [private report](https://github.com/Vavaste/sql-delta-maven-plugin/security/advisories/new), not to an issue.
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: spring-hibernate
+    attributes:
+      label: Spring Boot and Hibernate versions
+      placeholder: Spring Boot 4.0.1, Hibernate 7.2.0.Final
+    validations:
+      required: true
+  - type: input
+    id: database
+    attributes:
+      label: Database and version
+      placeholder: PostgreSQL 18.1
+    validations:
+      required: true
+  - type: input
+    id: java-maven
+    attributes:
+      label: Java and Maven versions
+      placeholder: Java 21, Maven 3.9.11
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      description: The command you ran, without the password.
+      placeholder: ./mvnw sql-delta:diff -Dsqldelta.name=add_customer_email
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened
+      description: The relevant lines of the draft, or the console output. No URL or password.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Smallest example
+      description: The smallest entity, or entity and migration, that shows the problem.
+      render: java
+    validations:
+      required: false

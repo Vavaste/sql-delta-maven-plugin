@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+    groups:
+      maven:
+        patterns: ['*']
+    ignore:
+      - dependency-name: 'org.liquibase:*'
+      - dependency-name: 'org.liquibase.ext:*'
+      - dependency-name: 'org.apache.maven:*'
+      - dependency-name: 'org.hibernate.orm:*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'org.springframework*'
+        update-types: ['version-update:semver-major']
+    commit-message:
+      prefix: build
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ['*']
+    commit-message:
+      prefix: build
