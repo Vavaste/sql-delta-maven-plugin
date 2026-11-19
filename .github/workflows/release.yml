@@ -17,11 +17,19 @@ jobs:
           distribution: temurin
           # the bytecode is fixed by maven.compiler.release=17
           java-version: '17'
-          cache: maven
           # writes a settings.xml with the server central (= publishingServerId) reading these variables
           server-id: central
           server-username-env-var: MAVEN_CENTRAL_USERNAME
           server-password-env-var: MAVEN_CENTRAL_PASSWORD
+      - name: Cache the local Maven repository
+        # the same cache as the ci workflow: Maven itself (~/.m2/wrapper) is not downloaded again at every release
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: maven-${{ runner.os }}-${{ hashFiles('pom.xml', '.mvn/wrapper/maven-wrapper.properties') }}
+          restore-keys: maven-${{ runner.os }}-
       - name: Set the version from the tag
         # tag v1.2.3 -> version 1.2.3, in the checked out pom.xml only: nothing is committed
         run: ./mvnw -B -ntp versions:set -DnewVersion=${GITHUB_REF_NAME#v} -DgenerateBackupPoms=false
