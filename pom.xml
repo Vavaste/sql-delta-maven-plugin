@@ -65,21 +65,21 @@
 		<!-- Hibernate/Spring stack the engine is compiled and tested against: Spring Boot 4 / Hibernate 7 by default,
 		     the hibernate6 profile below switches to Spring Boot 3 / Hibernate 6. These are plain properties rather
 		     than an activeByDefault profile, which Maven would drop as soon as -Prelease or any other profile is on. -->
-		<spring-boot.version>4.0.9</spring-boot.version>
+		<spring-boot.version>4.1.2</spring-boot.version>
 		<spring.version>7.0.10</spring.version>
-		<hibernate.version>7.2.25.Final</hibernate.version>
+		<hibernate.version>7.4.16.Final</hibernate.version>
 		<liquibase-hibernate.artifactId>liquibase-hibernate7</liquibase-hibernate.artifactId>
 		<!-- brings SpringImplicitNamingStrategy, which the engine looks for to pick Spring Boot's naming strategies:
 		     for the naming tests and the schemas the tests create -->
 		<spring-boot-naming.artifactId>spring-boot-hibernate</spring-boot-naming.artifactId>
 
-		<slf4j.version>2.0.17</slf4j.version>
+		<slf4j.version>2.0.20</slf4j.version>
 
 		<postgresql.version>42.7.14</postgresql.version>
-		<h2.version>2.4.240</h2.version>
-		<junit.version>5.14.4</junit.version>
+		<h2.version>2.5.252</h2.version>
+		<junit.version>6.1.3</junit.version>
 		<assertj.version>3.27.7</assertj.version>
-		<testcontainers.version>2.0.3</testcontainers.version>
+		<testcontainers.version>2.0.5</testcontainers.version>
 		<!-- the PostgreSQL of the Testcontainers tests; -Dsqldelta.test.postgres.image=postgres:15 runs them on another -->
 		<sqldelta.test.postgres.image>postgres:18.3-trixie</sqldelta.test.postgres.image>
 	</properties>
@@ -230,7 +230,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.15.0</version>
+					<version>3.16.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -245,12 +245,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>3.1.4</version>
+					<version>3.2.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.5.6</version>
+					<version>3.6.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
