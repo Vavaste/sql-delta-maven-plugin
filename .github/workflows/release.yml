@@ -41,3 +41,19 @@ jobs:
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           MAVEN_GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+  # The GitHub release of the tag, once Maven Central has published the version. A job of its own, so that write
+  # access to the repository and the publishing secrets never meet.
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          gh release create "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --title "$VERSION" --generate-notes \
+            --notes "On Maven Central: https://central.sonatype.com/artifact/io.github.vavaste/sql-delta-maven-plugin/$VERSION"

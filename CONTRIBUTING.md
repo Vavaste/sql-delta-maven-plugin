@@ -60,6 +60,8 @@ Push a tag `v<version>`, for example `v0.1.0`. The release workflow sets that ve
 committed) and runs `./mvnw -Prelease deploy`: sources and javadoc jars, signatures by the Bouncy Castle signer, and
 the upload to Maven Central through the Central Portal. It needs the secrets `MAVEN_CENTRAL_USERNAME` and
 `MAVEN_CENTRAL_PASSWORD` (a Portal user token), `MAVEN_GPG_KEY` (the armored private key) and `MAVEN_GPG_PASSPHRASE`.
-Then move `main` to the next snapshot: `./mvnw versions:set -DnewVersion=0.2.0-SNAPSHOT -DgenerateBackupPoms=false`.
+Once Central has published the version, a second job creates the GitHub release of the tag, with notes generated from
+the commits and a link to Central. Then move `main` to the next snapshot:
+`./mvnw versions:set -DnewVersion=0.2.0-SNAPSHOT -DgenerateBackupPoms=false`.
 
 To check the release build without signing or publishing: `./mvnw -Prelease -DskipTests -Dgpg.skip package`.
