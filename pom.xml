@@ -65,9 +65,9 @@
 		<!-- Hibernate/Spring stack the engine is compiled and tested against: Spring Boot 4 / Hibernate 7 by default,
 		     the hibernate6 profile below switches to Spring Boot 3 / Hibernate 6. These are plain properties rather
 		     than an activeByDefault profile, which Maven would drop as soon as -Prelease or any other profile is on. -->
-		<spring-boot.version>4.1.2</spring-boot.version>
-		<spring.version>7.0.10</spring.version>
-		<hibernate.version>7.4.16.Final</hibernate.version>
+		<spring-boot.version>4.2.0</spring-boot.version>
+		<spring.version>7.1.0</spring.version>
+		<hibernate.version>7.4.17.Final</hibernate.version>
 		<liquibase-hibernate.artifactId>liquibase-hibernate7</liquibase-hibernate.artifactId>
 		<!-- brings SpringImplicitNamingStrategy, which the engine looks for to pick Spring Boot's naming strategies:
 		     for the naming tests and the schemas the tests create -->
@@ -281,7 +281,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
-					<version>2.25.2</version>
+					<version>2.25.3</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
